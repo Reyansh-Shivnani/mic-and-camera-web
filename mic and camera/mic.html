@@ -1,0 +1,24 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>capture microphone audio into buffer</title>
+</head>
+<body>
+<audio id="player"></audio>
+<button onclick="player.play();">Resume voice capture</button>
+<button onclick="player.pause();">Pause voice capture</button>	
+<script>
+  const player = document.getElementById('player');
+  const handleSuccess = function(stream) {
+    if (window.URL) {
+      player.srcObject = stream;
+player.play();
+    } else {
+      player.src = stream;
+player.play();
+    }
+  };
+
+  navigator.mediaDevices.getUserMedia({ audio: true, video: false })
+      .then(handleSuccess);
+</script>
+</body>
+</html>
